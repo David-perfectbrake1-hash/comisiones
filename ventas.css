@@ -1,35 +1,252 @@
+/* =========================================
+   SECCIÓN 1: VARIABLES CSS & RESET
+   ========================================= */
+:root {
+    --bg-cuerpo: #0b1120;
+    --bg-tarjeta: #1e293b;
+    --bg-input: #0f172a;
+    --color-borde: #334155;
+    --texto-primario: #f8fafc;
+    --texto-secundario: #94a3b8;
+    --acento: #10b981;
+    --acento-hover: #059669;
+    --acento-activo: #047857;
+    --sombra-suave: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+    --sombra-fuerte: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+    --radio-borde: 12px;
+    --transicion: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   SECCIÓN 2: ESTILOS BASE (MOBILE FIRST)
+   ========================================= */
 body {
-    font-family: Arial;
-    background-color: #0f172a;
-    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-cuerpo);
+    color: var(--texto-primario);
+    line-height: 1.6;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 16px;
+    -webkit-font-smoothing: antialiased;
 }
 
-.contenedor {
-    background-color: #1e293b;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-}
-
-input {
+.calculadora-container {
+    background-color: var(--bg-tarjeta);
     width: 100%;
-    margin-bottom: 10px;
-    padding: 5px;
+    max-width: 400px;
+    padding: 24px;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-fuerte);
+    border: 1px solid var(--color-borde);
 }
 
-button {
+/* =========================================
+   SECCIÓN 3: TIPOGRAFÍA & ENCABEZADO
+   ========================================= */
+.calculadora-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.calculadora-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+.calculadora-header p {
+    font-size: 0.875rem;
+    color: var(--texto-secundario);
+}
+
+/* =========================================
+   SECCIÓN 4: FORMULARIO & INPUTS
+   ========================================= */
+.formulario-seccion {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo-grupo label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--texto-secundario);
+}
+
+.campo-grupo input {
     width: 100%;
-    padding: 10px;
-    background-color: #22c55e;
+    padding: 12px 14px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    color: var(--texto-primario);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transicion);
+}
+
+/* Eliminar flechas de inputs numéricos para estética limpia */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.campo-grupo input:focus {
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+.campo-grupo input::placeholder {
+    color: #475569;
+}
+
+/* =========================================
+   SECCIÓN 5: BOTÓN DE ACCIÓN
+   ========================================= */
+.btn-calcular {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--acento);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
     border: none;
-    color: white;
+    border-radius: 8px;
     cursor: pointer;
+    transition: var(--transicion);
+    margin-top: 4px;
 }
 
-button:hover {
-    background-color: #16a34a;
+.btn-calcular:hover {
+    background-color: var(--acento-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.25);
+}
+
+.btn-calcular:active {
+    background-color: var(--acento-activo);
+    transform: translateY(0);
+}
+
+/* =========================================
+   SECCIÓN 6: PANEL DE RESULTADOS
+   ========================================= */
+.resultados-panel {
+    background-color: rgba(15, 23, 42, 0.6);
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid var(--color-borde);
+}
+
+.resultados-panel h2 {
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+    color: var(--texto-primario);
+    border-bottom: 1px solid var(--color-borde);
+    padding-bottom: 8px;
+}
+
+.resultados-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resultado-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 0.95rem;
+}
+
+.resultado-fila.total {
+    border-top: 1px dashed var(--color-borde);
+    padding-top: 12px;
+    margin-top: 4px;
+}
+
+.resultado-etiqueta {
+    color: var(--texto-secundario);
+    font-weight: 500;
+}
+
+.resultado-dato {
+    color: var(--texto-primario);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.resultado-fila.total .resultado-dato {
+    color: var(--acento);
+    font-size: 1.25rem;
+}
+
+/* =========================================
+   SECCIÓN 7: MEDIA QUERIES (TABLET & DESKTOP)
+   ========================================= */
+@media (min-width: 768px) {
+    body {
+        padding: 40px;
+        background: radial-gradient(circle at top right, #1e293b 0%, #0b1120 60%);
+    }
+
+    .calculadora-container {
+        max-width: 480px;
+        padding: 32px;
+    }
+
+    .calculadora-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .formulario-seccion {
+        gap: 20px;
+    }
+
+    .campo-grupo input {
+        padding: 14px 16px;
+        font-size: 1.05rem;
+    }
+
+    .resultados-panel {
+        padding: 20px 24px;
+    }
+
+    .resultado-fila {
+        padding: 10px 0;
+        font-size: 1rem;
+    }
+
+    .resultado-fila.total .resultado-dato {
+        font-size: 1.4rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .calculadora-container {
+        max-width: 540px;
+    }
 }
