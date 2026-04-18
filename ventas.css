@@ -251,3 +251,14 @@ input[type="number"] {
         max-width: 540px;
     }
 }
+
+/* =========================================
+   ESTILOS PARA MENSAJES DE VALIDACIÓN
+   ========================================= */
+.error-message {
+    color: #ef4444;
+    font-style: italic;
+    font-size: 0.75rem;
+    margin-top: 4px;
+    display: block;
+}
